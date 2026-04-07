@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, Code, Briefcase, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { User, Code, Briefcase, Mail, Github, Linkedin } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 /* 
   Este componente gestiona el estado de la navegación de la landing page.
@@ -15,7 +16,7 @@ const Hero = () => (
         Hola, soy <span className="text-green-500">Jackson</span>
       </h1>
       <p className="text-xl text-gray-400 max-w-lg">
-        Desarrollador Full Stack apasionado por crear interfaces modernas, interactivas y eficientes. Especialista en React, Astro y diseño de interfaces de alto impacto.
+        Desarrollador Full Stack enfocado en crear interfaces modernas, interactivas, eficientes y fáciles de usar.
       </p>
       <div className="flex gap-4">
         <button className="uiverse-btn">Proyectos</button>
@@ -95,17 +96,10 @@ const Contact = () => (
       <div className="flex justify-center gap-8">
         <a href="#" className="uiverse-btn p-4"><Github /></a>
         <a href="#" className="uiverse-btn p-4"><Linkedin /></a>
-        <a href="#" className="uiverse-btn p-4"><Twitter /></a>
         <a href="#" className="uiverse-btn p-4"><Mail /></a>
       </div>
     </div>
   </section>
-);
-
-const Footer = () => (
-  <footer className="py-3 px-6 border-t border-green-900/20 text-center">
-    <p className="text-gray-500 text-sm">© 2026 Jackson. Todos los derechos reservados.</p>
-  </footer>
 );
 
 const LandingPage = () => {
@@ -123,26 +117,7 @@ const LandingPage = () => {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-[#001004] text-white font-sans selection:bg-green-500 selection:text-black">
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 bg-[#001004]/80 backdrop-blur-md border-b border-green-900/30">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-2xl font-black tracking-tighter text-green-500 cursor-pointer" onClick={() => setActiveSection('inicio')}>
-            JACKSON.DEV
-          </div>
-          <div className="hidden md:flex gap-8">
-            {['inicio', 'sobre', 'proyectos', 'contacto'].map((section) => (
-              <button
-                key={section}
-                onClick={() => setActiveSection(section)}
-                className={`text-sm font-medium uppercase tracking-widest hover:text-green-500 transition-colors ${activeSection === section ? 'text-green-500' : 'text-gray-400'}`}
-              >
-                {section}
-              </button>
-            ))}
-          </div>
-          <button className="uiverse-btn text-xs py-2 px-6">CV</button>
-        </div>
-      </nav>
+      <Navbar activeSection={activeSection} onNavigate={setActiveSection} />
 
       {/* Main Content with Transition Effect Placeholder */}
       {/* Área principal: ocupa el espacio restante entre navbar y footer */}
