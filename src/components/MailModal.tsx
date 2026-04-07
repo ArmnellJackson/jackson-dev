@@ -1,10 +1,11 @@
 /*
   Componente MailModal: modal con formulario de contacto integrado con Formspree.
-  Se muestra como overlay sobre la página al hacer click en el botón de Mail.
-  Recibe isOpen para controlar visibilidad y onClose para cerrar el modal.
+  Utiliza @formspree/react para gestionar el envío, validación y estados del formulario.
+  Se muestra como overlay al hacer click en el botón de Mail en la sección Contacto.
 */
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 import { X } from 'lucide-react';
 
 interface MailModalProps {
@@ -12,35 +13,14 @@ interface MailModalProps {
   onClose: () => void;
 }
 
-/* ID de Formspree: reemplazar con el endpoint real del dashboard */
-const FORMSPREE_ID = 'TU_FORMSPREE_ID';
-
 const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
-  const [submitted, setSubmitted] = useState(false);
+  /* Hook de Formspree: gestiona el estado de envío y errores de validación */
+  const [state, handleSubmit] = useForm('xpwdrazz');
 
   if (!isOpen) return null;
 
-  /* Manejo del envío del formulario vía Formspree */
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-      method: 'POST',
-      body: data,
-      headers: { Accept: 'application/json' },
-    });
-
-    if (res.ok) {
-      setSubmitted(true);
-      form.reset();
-    }
-  };
-
-  /* Cierra el modal y resetea el estado de envío */
+  /* Cierra el modal (el estado de éxito persiste hasta recargar la página) */
   const handleClose = () => {
-    setSubmitted(false);
     onClose();
   };
 
@@ -58,7 +38,7 @@ const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
 
         <h3 className="text-2xl font-bold text-white mb-6 text-center">Envíame un mensaje</h3>
 
-        {submitted ? (
+        {state.succeeded ? (
           /* Estado de éxito tras enviar el formulario */
           <div className="text-center space-y-4 py-8">
             <p className="text-green-500 text-lg font-medium">¡Mensaje enviado correctamente!</p>
@@ -66,7 +46,7 @@ const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
             <button onClick={handleClose} className="uiverse-btn text-sm py-2 px-6 mt-4">Cerrar</button>
           </div>
         ) : (
-          /* Formulario de contacto */
+          /* Formulario de contacto con validación de Formspree */
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="name" className="block text-sm text-gray-400 mb-1">Nombre</label>
@@ -78,6 +58,7 @@ const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
                 className="w-full px-4 py-3 rounded-xl bg-[#001004] border border-green-900/30 text-white placeholder-gray-600 focus:outline-none focus:border-green-500 transition-colors"
                 placeholder="Tu nombre"
               />
+              <ValidationError prefix="Nombre" field="name" errors={state.errors} className="text-red-400 text-xs mt-1" />
             </div>
             <div>
               <label htmlFor="email" className="block text-sm text-gray-400 mb-1">Correo electrónico</label>
@@ -89,6 +70,7 @@ const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
                 className="w-full px-4 py-3 rounded-xl bg-[#001004] border border-green-900/30 text-white placeholder-gray-600 focus:outline-none focus:border-green-500 transition-colors"
                 placeholder="tu@correo.com"
               />
+              <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-xs mt-1" />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm text-gray-400 mb-1">Mensaje</label>
@@ -100,9 +82,10 @@ const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
                 className="w-full px-4 py-3 rounded-xl bg-[#001004] border border-green-900/30 text-white placeholder-gray-600 focus:outline-none focus:border-green-500 transition-colors resize-none"
                 placeholder="Cuéntame sobre tu proyecto..."
               />
+              <ValidationError prefix="Mensaje" field="message" errors={state.errors} className="text-red-400 text-xs mt-1" />
             </div>
-            <button type="submit" className="uiverse-btn w-full py-3 text-sm font-bold">
-              Enviar mensaje
+            <button type="submit" disabled={state.submitting} className="uiverse-btn w-full py-3 text-sm font-bold disabled:opacity-50">
+              {state.submitting ? 'Enviando...' : 'Enviar mensaje'}
             </button>
           </form>
         )}
