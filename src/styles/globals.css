@@ -58,6 +58,7 @@
   .neumorph-container {
     border-radius: 50px;
     background: #001905;
+    padding: 0;
     box-shadow:  35px 35px 70px #000a02,
                  -35px -35px 70px #002808;
   }

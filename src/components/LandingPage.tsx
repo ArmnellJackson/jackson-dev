@@ -23,7 +23,7 @@ const Hero = () => (
       </div>
     </div>
     <div className="flex-1 flex justify-center">
-      <div className="neumorph-container p-8 w-64 h-64 md:w-96 md:h-96 flex items-center justify-center overflow-hidden">
+      <div className="neumorph-container w-64 h-64 md:w-96 md:h-96 flex items-center justify-center overflow-hidden">
         <img 
           src="/theDeveloper.png" 
           alt="Jackson Developer" 
