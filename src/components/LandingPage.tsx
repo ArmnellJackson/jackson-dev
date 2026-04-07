@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, Code, Briefcase, Mail, Github, Linkedin } from 'lucide-react';
+import { ShoppingCart, Code, Briefcase, Mail, Github, Linkedin, Workflow } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -44,8 +44,8 @@ const Servicios = () => (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {[
         { title: 'Apps Empresariales', icon: <Briefcase className="w-8 h-8 text-green-500" />, desc: 'Aplicaciones web completas para empresas de cualquier rubro. Como consultorios médicos y veterinarios (citas online, historias clínicas), Restaurantes (pedidos, reservas, inventario), Sistemas de Recursos Humanos (gestión de empleados, nómina, asistencias, vacaciones.) etc.' },
-        { title: 'Habilidades', icon: <Code className="w-8 h-8 text-green-500" />, desc: 'Experticia en el ecosistema moderno de JavaScript, incluyendo React, Node.js y Next.js.' },
-        { title: 'Enfoque', icon: <User className="w-8 h-8 text-green-500" />, desc: 'Centrado en la experiencia del usuario y en escribir código limpio y mantenible.' }
+        { title: 'E-commerce', icon: <ShoppingCart className="w-8 h-8 text-green-500" />, desc: 'Plataformas de comercio electrónico con pasarelas de pago seguras, gestión de inventario, carrito de compras y panel de administración completo.' },
+        { title: 'Automatizaciones', icon: <Workflow className="w-8 h-8 text-green-500" />, desc: 'Flujos de trabajo automatizados con n8n para integrar servicios, sincronizar datos, enviar notificaciones y eliminar tareas repetitivas en tu negocio.' }
       ].map((item, idx) => (
         <Card key={idx} className="bg-[#001905] border-none shadow-none neumorph-container p-4">
           <CardHeader className="flex items-center justify-center">
