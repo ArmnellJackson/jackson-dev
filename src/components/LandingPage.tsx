@@ -9,7 +9,7 @@ import { User, Code, Briefcase, Mail, Github, Linkedin, Twitter } from 'lucide-r
 */
 
 const Hero = () => (
-  <section className="flex flex-col md:flex-row items-center justify-between gap-12 py-20 px-6 max-w-7xl mx-auto min-h-[80vh]">
+  <section className="flex flex-col md:flex-row items-center justify-between gap-12 py-10 px-6 max-w-7xl mx-auto h-full">
     <div className="flex-1 space-y-6">
       <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white">
         Hola, soy <span className="text-green-500">Jackson</span>
@@ -35,7 +35,7 @@ const Hero = () => (
 );
 
 const About = () => (
-  <section className="py-20 px-6 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-center space-y-12">
+  <section className="py-10 px-6 max-w-7xl mx-auto h-full flex flex-col justify-center space-y-12">
     <div className="text-center space-y-4">
       <h2 className="text-4xl font-bold text-white">Sobre Mí</h2>
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
@@ -60,8 +60,9 @@ const About = () => (
   </section>
 );
 
+/* Sección de proyectos: permite scroll vertical para contenido extenso */
 const Projects = () => (
-  <section className="py-20 px-6 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-center space-y-12">
+  <section className="py-10 px-6 max-w-7xl mx-auto flex flex-col space-y-12">
     <div className="text-center space-y-4">
       <h2 className="text-4xl font-bold text-white">Proyectos Destacados</h2>
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
@@ -84,7 +85,7 @@ const Projects = () => (
 );
 
 const Contact = () => (
-  <section className="py-20 px-6 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-center space-y-12">
+  <section className="py-10 px-6 max-w-7xl mx-auto h-full flex flex-col justify-center space-y-12">
     <div className="text-center space-y-4">
       <h2 className="text-4xl font-bold text-white">Contacto</h2>
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
@@ -96,9 +97,6 @@ const Contact = () => (
         <a href="#" className="uiverse-btn p-4"><Linkedin /></a>
         <a href="#" className="uiverse-btn p-4"><Twitter /></a>
         <a href="#" className="uiverse-btn p-4"><Mail /></a>
-      </div>
-      <div className="pt-8 text-center">
-        <button className="uiverse-btn w-full">Enviar Mensaje</button>
       </div>
     </div>
   </section>
@@ -124,7 +122,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#001004] text-white font-sans selection:bg-green-500 selection:text-black">
+    <div className="h-screen flex flex-col overflow-hidden bg-[#001004] text-white font-sans selection:bg-green-500 selection:text-black">
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-[#001004]/80 backdrop-blur-md border-b border-green-900/30">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -147,7 +145,8 @@ const LandingPage = () => {
       </nav>
 
       {/* Main Content with Transition Effect Placeholder */}
-      <main className="animate-in fade-in duration-700 min-h-[calc(100vh-140px)]">
+      {/* Área principal: ocupa el espacio restante entre navbar y footer */}
+      <main className={`flex-1 min-h-0 animate-in fade-in duration-700 flex flex-col ${activeSection === 'proyectos' ? 'overflow-y-auto' : 'overflow-hidden'}`}>
         {renderSection()}
       </main>
 
