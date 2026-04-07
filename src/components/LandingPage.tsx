@@ -4,6 +4,7 @@ import { ShoppingCart, Code, Briefcase, Mail, Linkedin, Workflow } from 'lucide-
 import { FaWhatsapp } from 'react-icons/fa';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import MailModal from '@/components/MailModal';
 
 /* 
   Este componente gestiona el estado de la navegación de la landing page.
@@ -100,7 +101,8 @@ const Projects = () => (
   </section>
 );
 
-const Contact = () => (
+/* Sección de contacto: el botón de Mail abre un modal con formulario Formspree */
+const Contact = ({ onOpenMail }: { onOpenMail: () => void }) => (
   <section className="py-10 px-6 max-w-7xl mx-auto h-full flex flex-col justify-center space-y-12">
     <div className="text-center space-y-4">
       <h2 className="text-4xl font-bold text-white">Contacto</h2>
@@ -111,7 +113,7 @@ const Contact = () => (
       <div className="flex justify-center gap-8">
         <a href="https://www.linkedin.com/in/armnell-jackson-gomez-garcia-b01619152/" target="_blank" rel="noopener noreferrer" className="uiverse-btn p-4"><Linkedin /></a>
         <a href="https://wa.me/51934272882?text=Hola%2C%20vengo%20de%20tu%20Landing%20page%20%27Jackson.Dev%27" target="_blank" rel="noopener noreferrer" className="uiverse-btn p-4"><FaWhatsapp size={24} /></a>
-        <a href="#" className="uiverse-btn p-4"><Mail /></a>
+        <button className="uiverse-btn p-4" onClick={onOpenMail}><Mail /></button>
       </div>
     </div>
   </section>
@@ -119,13 +121,14 @@ const Contact = () => (
 
 const LandingPage = () => {
   const [activeSection, setActiveSection] = useState('inicio');
+  const [isMailOpen, setIsMailOpen] = useState(false);
 
   const renderSection = () => {
     switch (activeSection) {
       case 'inicio': return <Hero onNavigate={setActiveSection} />;
       case 'servicios': return <Servicios />;
       case 'proyectos': return <Projects />;
-      case 'contacto': return <Contact />;
+      case 'contacto': return <Contact onOpenMail={() => setIsMailOpen(true)} />;
       default: return <Hero />;
     }
   };
@@ -141,6 +144,9 @@ const LandingPage = () => {
       </main>
 
       <Footer />
+
+      {/* Modal de correo: se renderiza sobre todo el contenido */}
+      <MailModal isOpen={isMailOpen} onClose={() => setIsMailOpen(false)} />
     </div>
   );
 };
