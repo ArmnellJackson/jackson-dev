@@ -16,7 +16,7 @@ const Hero = () => (
         Hola, soy <span className="text-green-500">Jackson</span>
       </h1>
       <p className="text-xl text-gray-400 max-w-lg">
-        Desarrollador Full Stack enfocado en crear interfaces modernas, interactivas, eficientes y fáciles de usar.
+        Desarrollador Full Stack enfocado en crear Apps Web modernas, interactivas, eficientes y fáciles de usar.
       </p>
       <div className="flex gap-4">
         <button className="uiverse-btn">Proyectos</button>
@@ -35,15 +35,15 @@ const Hero = () => (
   </section>
 );
 
-const About = () => (
+const Servicios = () => (
   <section className="py-10 px-6 max-w-7xl mx-auto h-full flex flex-col justify-center space-y-12">
     <div className="text-center space-y-4">
-      <h2 className="text-4xl font-bold text-white">Sobre Mí</h2>
+      <h2 className="text-4xl font-bold text-white">Servicios</h2>
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {[
-        { title: 'Experiencia', icon: <Briefcase className="w-8 h-8 text-green-500" />, desc: '5+ años construyendo soluciones digitales para startups y empresas globales.' },
+        { title: 'Apps Empresariales', icon: <Briefcase className="w-8 h-8 text-green-500" />, desc: 'Aplicaciones web completas para empresas de cualquier rubro. Como consultorios médicos y veterinarios (citas online, historias clínicas), Restaurantes (pedidos, reservas, inventario), Sistemas de Recursos Humanos (gestión de empleados, nómina, asistencias, vacaciones.) etc.' },
         { title: 'Habilidades', icon: <Code className="w-8 h-8 text-green-500" />, desc: 'Experticia en el ecosistema moderno de JavaScript, incluyendo React, Node.js y Next.js.' },
         { title: 'Enfoque', icon: <User className="w-8 h-8 text-green-500" />, desc: 'Centrado en la experiencia del usuario y en escribir código limpio y mantenible.' }
       ].map((item, idx) => (
@@ -108,7 +108,7 @@ const LandingPage = () => {
   const renderSection = () => {
     switch (activeSection) {
       case 'inicio': return <Hero />;
-      case 'sobre': return <About />;
+      case 'servicios': return <Servicios />;
       case 'proyectos': return <Projects />;
       case 'contacto': return <Contact />;
       default: return <Hero />;

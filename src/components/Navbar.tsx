@@ -10,7 +10,7 @@ interface NavbarProps {
   onNavigate: (section: string) => void;
 }
 
-const navItems = ['inicio', 'sobre', 'proyectos', 'contacto'];
+const navItems = ['inicio', 'servicios', 'proyectos', 'contacto'];
 
 const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => (
   <nav className="sticky top-0 z-50 bg-[#001004]/80 backdrop-blur-md border-b border-green-900/30">
