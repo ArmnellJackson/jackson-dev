@@ -35,7 +35,7 @@ const Hero = () => (
 );
 
 const About = () => (
-  <section className="py-20 px-6 max-w-7xl mx-auto space-y-12">
+  <section className="py-20 px-6 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-center space-y-12">
     <div className="text-center space-y-4">
       <h2 className="text-4xl font-bold text-white">Sobre Mí</h2>
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
@@ -61,7 +61,7 @@ const About = () => (
 );
 
 const Projects = () => (
-  <section className="py-20 px-6 max-w-7xl mx-auto space-y-12">
+  <section className="py-20 px-6 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-center space-y-12">
     <div className="text-center space-y-4">
       <h2 className="text-4xl font-bold text-white">Proyectos Destacados</h2>
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
@@ -84,12 +84,12 @@ const Projects = () => (
 );
 
 const Contact = () => (
-  <section className="py-20 px-6 max-w-7xl mx-auto space-y-12">
+  <section className="py-20 px-6 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-center space-y-12">
     <div className="text-center space-y-4">
       <h2 className="text-4xl font-bold text-white">Contacto</h2>
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
     </div>
-    <div className="max-w-2xl mx-auto neumorph-container p-10 space-y-8">
+    <div className="max-w-2xl mx-auto neumorph-container p-10 space-y-8 w-full">
       <p className="text-center text-gray-400 text-lg">¿Tienes un proyecto en mente? ¡Hablemos y hagámoslo realidad!</p>
       <div className="flex justify-center gap-8">
         <a href="#" className="uiverse-btn p-4"><Github /></a>
@@ -102,6 +102,12 @@ const Contact = () => (
       </div>
     </div>
   </section>
+);
+
+const Footer = () => (
+  <footer className="py-3 px-6 border-t border-green-900/20 text-center">
+    <p className="text-gray-500 text-sm">© 2026 Jackson. Todos los derechos reservados.</p>
+  </footer>
 );
 
 const LandingPage = () => {
@@ -141,14 +147,11 @@ const LandingPage = () => {
       </nav>
 
       {/* Main Content with Transition Effect Placeholder */}
-      <main className="animate-in fade-in duration-700">
+      <main className="animate-in fade-in duration-700 min-h-[calc(100vh-140px)]">
         {renderSection()}
       </main>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-green-900/20 text-center">
-        <p className="text-gray-500 text-sm">© 2026 Jackson. Todos los derechos reservados.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
