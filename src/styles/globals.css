@@ -64,26 +64,24 @@
   }
 
   .uiverse-btn {
-    color: #090909;
+    color: #e8e8e8;
     padding: 0.7em 1.7em;
     font-size: 18px;
-    border-radius: 0.5em;
-    background: #e8e8e8;
+    border-radius: 50px;
+    background: #001905;
     cursor: pointer;
-    border: 1px solid #e8e8e8;
+    border: none;
     transition: all 0.3s;
     box-shadow:
-      6px 6px 12px #c5c5c5,
-      -6px -6px 12px #ffffff;
+      35px 35px 70px #000a02,
+      -35px -35px 70px #002808;
   }
 
   .uiverse-btn:active {
-    color: #666;
+    color: #999;
     box-shadow:
-      0px 0px 0px #c5c5c5,
-      0px 0px 0px #ffffff,
-      inset 4px 4px 12px #c5c5c5,
-      inset -4px -4px 12px #ffffff;
+      inset 8px 8px 16px #000a02,
+      inset -8px -8px 16px #002808;
   }
 }
 

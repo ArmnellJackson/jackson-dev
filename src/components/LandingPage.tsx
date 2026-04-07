@@ -19,7 +19,7 @@ const Hero = () => (
       </p>
       <div className="flex gap-4">
         <button className="uiverse-btn">Proyectos</button>
-        <button className="uiverse-btn" style={{ background: 'transparent', color: '#fff', border: '1px solid #333' }}>Contacto</button>
+        <button className="uiverse-btn" style={{ background: 'transparent', border: '1px solid #22c55e', color: '#22c55e' }}>Contacto</button>
       </div>
     </div>
     <div className="flex-1 flex justify-center">
