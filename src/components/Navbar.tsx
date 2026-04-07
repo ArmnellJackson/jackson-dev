@@ -26,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
 
   return (
     <nav className="sticky top-0 z-50 bg-[#001004]/80 backdrop-blur-md border-b border-green-900/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-0 sm:py-2.5 flex items-center justify-between">
         {/* Logo: redirige a la sección inicio */}
         <div
           className="text-xl sm:text-2xl font-black tracking-tighter text-green-500 cursor-pointer"
