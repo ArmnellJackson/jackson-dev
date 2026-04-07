@@ -95,7 +95,7 @@ const Contact = () => (
     <div className="max-w-2xl mx-auto neumorph-container p-10 space-y-8 w-full">
       <p className="text-center text-gray-400 text-lg">¿Tienes un proyecto en mente? ¡Hablemos y hagámoslo realidad!</p>
       <div className="flex justify-center gap-8">
-        <a href="#" className="uiverse-btn p-4"><Linkedin /></a>
+        <a href="https://www.linkedin.com/in/armnell-jackson-gomez-garcia-b01619152/" target="_blank" rel="noopener noreferrer" className="uiverse-btn p-4"><Linkedin /></a>
         <a href="https://wa.me/51934272882?text=Hola%2C%20vengo%20de%20tu%20Landing%20page%20%27Jackson.Dev%27" target="_blank" rel="noopener noreferrer" className="uiverse-btn p-4"><FaWhatsapp size={24} /></a>
         <a href="#" className="uiverse-btn p-4"><Mail /></a>
       </div>
