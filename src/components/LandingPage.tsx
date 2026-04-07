@@ -10,7 +10,8 @@ import Footer from '@/components/Footer';
   Permite mostrar secciones individuales controladas por el Navbar.
 */
 
-const Hero = () => (
+/* Sección Hero: recibe onNavigate para redirigir los botones CTA a sus secciones */
+const Hero = ({ onNavigate }: { onNavigate: (section: string) => void }) => (
   <section className="flex flex-col md:flex-row items-center justify-between gap-12 py-10 px-6 max-w-7xl mx-auto h-full">
     <div className="flex-1 space-y-6">
       <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white">
@@ -20,8 +21,8 @@ const Hero = () => (
         Desarrollador Full Stack enfocado en crear Apps Web modernas, interactivas, eficientes y fáciles de usar.
       </p>
       <div className="flex gap-4">
-        <button className="uiverse-btn">Proyectos</button>
-        <button className="uiverse-btn" style={{ background: 'transparent', border: '1px solid #22c55e', color: '#22c55e' }}>Contacto</button>
+        <button className="uiverse-btn" onClick={() => onNavigate('proyectos')}>Proyectos</button>
+        <button className="uiverse-btn" style={{ background: 'transparent', border: '1px solid #22c55e', color: '#22c55e' }} onClick={() => onNavigate('contacto')}>Contacto</button>
       </div>
     </div>
     <div className="flex-1 flex justify-center">
@@ -70,16 +71,29 @@ const Projects = () => (
       <div className="w-20 h-1 bg-green-500 mx-auto"></div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {[1, 2, 3, 4].map((i) => (
+      {[
+        { name: 'Proyecto 1', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
+        { name: 'Proyecto 2', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
+        { name: 'Proyecto 3', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
+        { name: 'Proyecto 4', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
+      ].map((project, i) => (
         <div key={i} className="neumorph-container p-4 overflow-hidden group">
-          <div className="aspect-video bg-gray-800 rounded-[30px] mb-4 overflow-hidden">
+          {/* Imagen cliqueable: lleva al proyecto en producción */}
+          <a href={project.live} target="_blank" rel="noopener noreferrer" className="block aspect-video bg-gray-800 rounded-[30px] mb-4 overflow-hidden cursor-pointer">
             <div className="w-full h-full bg-gradient-to-br from-green-900 to-black flex items-center justify-center opacity-50 group-hover:scale-105 transition-transform duration-500">
-               <Code className="w-12 h-12 text-white opacity-20" />
+              <Code className="w-12 h-12 text-white opacity-20" />
             </div>
+          </a>
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-2">{project.name}</h3>
+              <p className="text-gray-400">{project.desc}</p>
+            </div>
+            {/* Icono de código: lleva al repositorio del proyecto */}
+            <a href={project.repo} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition-colors ml-4 shrink-0" title="Ver código fuente">
+              <Code className="w-6 h-6" />
+            </a>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-2">Proyecto {i}</h3>
-          <p className="text-gray-400 mb-4">Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.</p>
-          <button className="uiverse-btn text-sm py-2 px-4">Ver Detalles</button>
         </div>
       ))}
     </div>
@@ -108,7 +122,7 @@ const LandingPage = () => {
 
   const renderSection = () => {
     switch (activeSection) {
-      case 'inicio': return <Hero />;
+      case 'inicio': return <Hero onNavigate={setActiveSection} />;
       case 'servicios': return <Servicios />;
       case 'proyectos': return <Projects />;
       case 'contacto': return <Contact />;

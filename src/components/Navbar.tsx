@@ -44,7 +44,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => (
         <a href="https://github.com/ArmnellJackson" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-500 transition-colors">
           <Github className="w-5 h-5" strokeWidth={2.5} />
         </a>
-        <button className="uiverse-btn text-xs py-2 px-6">CV</button>
+        <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white">CV</button>
       </div>
     </div>
   </nav>
