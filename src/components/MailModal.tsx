@@ -27,7 +27,7 @@ const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={handleClose}>
       {/* Contenedor del modal: detiene la propagación del click para no cerrar al interactuar */}
-      <div className="neumorph-container w-full max-w-lg mx-4 p-8 relative" onClick={(e) => e.stopPropagation()}>
+      <div className="neumorph-container w-full max-w-lg mx-3 sm:mx-4 p-5 sm:p-8 relative" onClick={(e) => e.stopPropagation()}>
         {/* Botón de cierre */}
         <button
           onClick={handleClose}
@@ -36,7 +36,7 @@ const MailModal: React.FC<MailModalProps> = ({ isOpen, onClose }) => {
           <X className="w-5 h-5" />
         </button>
 
-        <h3 className="text-2xl font-bold text-white mb-6 text-center">Envíame un mensaje</h3>
+        <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 text-center">Envíame un mensaje</h3>
 
         {state.succeeded ? (
           /* Estado de éxito tras enviar el formulario */

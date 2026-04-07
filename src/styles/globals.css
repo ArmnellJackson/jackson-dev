@@ -54,34 +54,75 @@
   }
 }
 
+/* Componentes neumórficos responsivos: sombras reducidas en móvil para evitar
+   desbordamiento y mejorar rendimiento. Escalan progresivamente en pantallas mayores. */
 @layer components {
   .neumorph-container {
-    border-radius: 50px;
+    border-radius: 30px;
     background: #001905;
     padding: 0;
-    box-shadow:  35px 35px 70px #000a02,
-                 -35px -35px 70px #002808;
+    box-shadow: 15px 15px 30px #000a02,
+                -15px -15px 30px #002808;
   }
 
   .uiverse-btn {
     color: #e8e8e8;
-    padding: 0.7em 1.7em;
-    font-size: 18px;
+    padding: 0.6em 1.4em;
+    font-size: 15px;
     border-radius: 50px;
     background: #001905;
     cursor: pointer;
     border: none;
     transition: all 0.3s;
     box-shadow:
-      35px 35px 70px #000a02,
-      -35px -35px 70px #002808;
+      15px 15px 30px #000a02,
+      -15px -15px 30px #002808;
   }
 
   .uiverse-btn:active {
     color: #999;
     box-shadow:
-      inset 8px 8px 16px #000a02,
-      inset -8px -8px 16px #002808;
+      inset 6px 6px 12px #000a02,
+      inset -6px -6px 12px #002808;
+  }
+
+  /* A partir de sm (640px): sombras y tamaños intermedios */
+  @media (min-width: 640px) {
+    .neumorph-container {
+      border-radius: 40px;
+      box-shadow: 25px 25px 50px #000a02,
+                  -25px -25px 50px #002808;
+    }
+
+    .uiverse-btn {
+      padding: 0.7em 1.7em;
+      font-size: 17px;
+      box-shadow:
+        25px 25px 50px #000a02,
+        -25px -25px 50px #002808;
+    }
+  }
+
+  /* A partir de md (768px): sombras completas originales */
+  @media (min-width: 768px) {
+    .neumorph-container {
+      border-radius: 50px;
+      box-shadow: 35px 35px 70px #000a02,
+                  -35px -35px 70px #002808;
+    }
+
+    .uiverse-btn {
+      font-size: 18px;
+      box-shadow:
+        35px 35px 70px #000a02,
+        -35px -35px 70px #002808;
+    }
+
+    .uiverse-btn:active {
+      box-shadow:
+        inset 8px 8px 16px #000a02,
+        inset -8px -8px 16px #002808;
+    }
   }
 }
 
