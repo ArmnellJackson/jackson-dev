@@ -45,10 +45,10 @@ const Hero = ({ onNavigate }: { onNavigate: (section: string) => void }) => {
   useEffect(() => setMounted(true), []);
 
   /* Hook para adaptar logoHeight según viewport: 20px en móvil, 40px en sm+ */
-  const [logoHeight, setLogoHeight] = useState(40);
+  const [logoHeight, setLogoHeight] = useState(24);
   useEffect(() => {
     const mql = window.matchMedia('(max-width: 639px)');
-    const update = (e: MediaQueryListEvent | MediaQueryList) => setLogoHeight(e.matches ? 20 : 40);
+    const update = (e: MediaQueryListEvent | MediaQueryList) => setLogoHeight(e.matches ? 16 : 24);
     update(mql);
     mql.addEventListener('change', update);
     return () => mql.removeEventListener('change', update);
@@ -57,7 +57,7 @@ const Hero = ({ onNavigate }: { onNavigate: (section: string) => void }) => {
   return (
   <section className="flex flex-col h-full">
     {/* Carrusel infinito de logos de tecnologías — solo se renderiza en cliente */}
-    <div className="px-4 sm:px-6 py-3 sm:py-4 max-w-7xl mx-auto w-full text-green-500">
+    <div className="px-4 sm:px-6 pt-1.5 sm:pt-2 max-w-7xl mx-auto w-full text-green-500">
       {mounted && (
         <LogoLoop
           logos={techLogos}
