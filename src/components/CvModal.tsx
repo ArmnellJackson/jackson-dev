@@ -78,17 +78,6 @@ const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
           />
         </div>
 
-        {/* Fallback para móviles donde el visor embebido no funciona correctamente */}
-        <div className="mt-3 text-center sm:hidden shrink-0">
-          <a
-            href="/CV-DEV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="uiverse-btn inline-block text-xs py-2 px-6 font-bold"
-          >
-            Abrir CV en nueva pestaña
-          </a>
-        </div>
       </div>
     </div>
   );
