@@ -4,7 +4,7 @@
   En desktop los enlaces y accesos se muestran en línea; en móvil se despliegan verticalmente.
 */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Github, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -24,6 +24,16 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenCv }) 
     onNavigate(section);
     setIsOpen(false);
   };
+
+  /* En móvil (< 768px) abre el PDF directo en nueva pestaña; en desktop abre el modal */
+  const handleCv = useCallback(() => {
+    if (window.innerWidth < 768) {
+      window.open('/CV-DEV.pdf', '_blank');
+    } else {
+      onOpenCv();
+    }
+    setIsOpen(false);
+  }, [onOpenCv]);
 
   return (
     <nav className="sticky top-0 z-50 bg-[#001004]/80 backdrop-blur-md border-b border-green-900/30">
@@ -56,7 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenCv }) 
           <a href="https://github.com/ArmnellJackson" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-500 transition-colors">
             <Github className="w-5 h-5" strokeWidth={2.5} />
           </a>
-          <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white" onClick={onOpenCv}>CV</button>
+          <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white" onClick={handleCv}>CV</button>
         </div>
 
         {/* Botón hamburguesa: visible solo en móvil */}
@@ -70,9 +80,9 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenCv }) 
         </button>
       </div>
 
-      {/* Menú desplegable móvil: enlaces de navegación + accesos directos */}
+      {/* Menú desplegable móvil: posicionado absoluto para flotar sobre el contenido */}
       {isOpen && (
-        <div className="md:hidden border-t border-green-900/30 bg-[#001004]/95 backdrop-blur-md">
+        <div className="md:hidden absolute left-0 right-0 top-full border-t border-green-900/30 bg-[#001004]/95 backdrop-blur-md z-50">
           <div className="px-4 py-4 space-y-1">
             {/* Enlaces de navegación en formato vertical */}
             {navItems.map((section) => (
@@ -97,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenCv }) 
               <a href="https://github.com/ArmnellJackson" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-500 transition-colors p-2">
                 <Github className="w-5 h-5" strokeWidth={2.5} />
               </a>
-              <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white" onClick={() => { onOpenCv(); setIsOpen(false); }}>CV</button>
+              <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white" onClick={handleCv}>CV</button>
             </div>
           </div>
         </div>
