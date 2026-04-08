@@ -4,7 +4,7 @@
   En desktop los enlaces y accesos se muestran en línea; en móvil se despliegan verticalmente.
 */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Github, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -18,6 +18,26 @@ const navItems = ['inicio', 'servicios', 'proyectos', 'contacto'];
 const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenCv }) => {
   /* Estado del menú hamburguesa en móvil */
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  /* Cierra el menú móvil al presionar Escape o al hacer click fuera del navbar */
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   /* Navega a la sección indicada y cierra el menú móvil */
   const handleNavigate = (section: string) => {
@@ -36,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenCv }) 
   }, [onOpenCv]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#001004]/80 backdrop-blur-md border-b border-green-900/30">
+    <nav ref={navRef} className="sticky top-0 z-50 bg-[#001004]/80 backdrop-blur-md border-b border-green-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-0 sm:py-2.5 flex items-center justify-between">
         {/* Logo: redirige a la sección inicio */}
         <div
