@@ -1,20 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShoppingCart, Code, Briefcase, Mail, Linkedin, Workflow } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaAws } from 'react-icons/fa';
+import {
+  SiMysql, SiReact, SiNextdotjs, SiTailwindcss, SiJavascript,
+  SiTypescript, SiGit, SiGithub, SiVercel, SiSupabase, SiAstro,
+  SiPostgresql
+} from 'react-icons/si';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MailModal from '@/components/MailModal';
+import LogoLoop from '@/components/LogoLoop';
 
-/* 
+/*
   Este componente gestiona el estado de la navegación de la landing page.
   Permite mostrar secciones individuales controladas por el Navbar.
 */
 
 /* Sección Hero: recibe onNavigate para redirigir los botones CTA a sus secciones.
+   Incluye carrusel LogoLoop de tecnologías en la parte superior.
    Layout responsivo: columna en móvil, fila en desktop. Tipografía fluida con clamp(). */
-const Hero = ({ onNavigate }: { onNavigate: (section: string) => void }) => (
-  <section className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 py-8 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto h-full">
+const Hero = ({ onNavigate }: { onNavigate: (section: string) => void }) => {
+  /* Logos de tecnologías para el carrusel infinito, definidos dentro del componente
+     para evitar problemas de serialización con JSX en la hidratación de Astro */
+  const techLogos = useMemo(() => [
+    { node: <SiMysql className="text-current" />, title: 'MySQL' },
+    { node: <SiReact className="text-current" />, title: 'React' },
+    { node: <SiNextdotjs className="text-current" />, title: 'Next.js' },
+    { node: <SiTailwindcss className="text-current" />, title: 'Tailwind CSS' },
+    { node: <SiJavascript className="text-current" />, title: 'JavaScript' },
+    { node: <SiTypescript className="text-current" />, title: 'TypeScript' },
+    { node: <SiGit className="text-current" />, title: 'Git' },
+    { node: <SiGithub className="text-current" />, title: 'GitHub' },
+    { node: <FaAws className="text-current" />, title: 'AWS' },
+    { node: <SiVercel className="text-current" />, title: 'Vercel' },
+    { node: <SiSupabase className="text-current" />, title: 'Supabase' },
+    { node: <SiAstro className="text-current" />, title: 'Astro' },
+    { node: <SiPostgresql className="text-current" />, title: 'PostgreSQL' },
+  ], []);
+
+  /* Flag de montaje: evita renderizar LogoLoop en SSR para prevenir mismatch de hidratación.
+     El LogoLoop calcula dimensiones y copias dinámicamente, lo cual genera DOM distinto al SSR. */
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  /* Hook para adaptar logoHeight según viewport: 20px en móvil, 40px en sm+ */
+  const [logoHeight, setLogoHeight] = useState(40);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 639px)');
+    const update = (e: MediaQueryListEvent | MediaQueryList) => setLogoHeight(e.matches ? 20 : 40);
+    update(mql);
+    mql.addEventListener('change', update);
+    return () => mql.removeEventListener('change', update);
+  }, []);
+
+  return (
+  <section className="flex flex-col h-full">
+    {/* Carrusel infinito de logos de tecnologías — solo se renderiza en cliente */}
+    <div className="px-4 sm:px-6 py-3 sm:py-4 max-w-7xl mx-auto w-full text-green-500">
+      {mounted && (
+        <LogoLoop
+          logos={techLogos}
+          speed={40}
+          direction="left"
+          logoHeight={logoHeight}
+          gap={40}
+          hoverSpeed={0}
+          scaleOnHover
+          fadeOut
+          fadeOutColor="#001004"
+          ariaLabel="Tecnologías utilizadas"
+        />
+      )}
+    </div>
+
+    <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 flex-1 py-4 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto w-full">
     <div className="flex-1 space-y-4 sm:space-y-6 text-center md:text-left">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white">
         Hola, soy <span className="text-green-500">Jackson</span>
@@ -36,8 +96,10 @@ const Hero = ({ onNavigate }: { onNavigate: (section: string) => void }) => (
         />
       </div>
     </div>
+    </div>
   </section>
-);
+  );
+};
 
 /* Sección Servicios: grid de cards con layout responsivo.
    En móvil las cards se apilan verticalmente sin centrado vertical para permitir scroll desde el inicio.
@@ -123,7 +185,7 @@ const LandingPage = () => {
       case 'servicios': return <Servicios />;
       case 'proyectos': return <Projects />;
       case 'contacto': return <Contact onOpenMail={() => setIsMailOpen(true)} />;
-      default: return <Hero />;
+      default: return <Hero onNavigate={setActiveSection} />;
     }
   };
 
