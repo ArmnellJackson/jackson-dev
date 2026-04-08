@@ -10,11 +10,12 @@ import { Github, Menu, X } from 'lucide-react';
 interface NavbarProps {
   activeSection: string;
   onNavigate: (section: string) => void;
+  onOpenCv: () => void;
 }
 
 const navItems = ['inicio', 'servicios', 'proyectos', 'contacto'];
 
-const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
+const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenCv }) => {
   /* Estado del menú hamburguesa en móvil */
   const [isOpen, setIsOpen] = useState(false);
 
@@ -55,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
           <a href="https://github.com/ArmnellJackson" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-500 transition-colors">
             <Github className="w-5 h-5" strokeWidth={2.5} />
           </a>
-          <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white">CV</button>
+          <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white" onClick={onOpenCv}>CV</button>
         </div>
 
         {/* Botón hamburguesa: visible solo en móvil */}
@@ -96,7 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
               <a href="https://github.com/ArmnellJackson" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-500 transition-colors p-2">
                 <Github className="w-5 h-5" strokeWidth={2.5} />
               </a>
-              <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white">CV</button>
+              <button className="uiverse-btn text-xs py-2 px-6 font-bold text-white" onClick={() => { onOpenCv(); setIsOpen(false); }}>CV</button>
             </div>
           </div>
         </div>

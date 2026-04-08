@@ -10,6 +10,7 @@ import {
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MailModal from '@/components/MailModal';
+import CvModal from '@/components/CvModal';
 import LogoLoop from '@/components/LogoLoop';
 
 /*
@@ -178,6 +179,7 @@ const Contact = ({ onOpenMail }: { onOpenMail: () => void }) => (
 const LandingPage = () => {
   const [activeSection, setActiveSection] = useState('inicio');
   const [isMailOpen, setIsMailOpen] = useState(false);
+  const [isCvOpen, setIsCvOpen] = useState(false);
 
   const renderSection = () => {
     switch (activeSection) {
@@ -191,7 +193,7 @@ const LandingPage = () => {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-[#001004] text-white font-sans selection:bg-green-500 selection:text-black">
-      <Navbar activeSection={activeSection} onNavigate={setActiveSection} />
+      <Navbar activeSection={activeSection} onNavigate={setActiveSection} onOpenCv={() => setIsCvOpen(true)} />
 
       {/* Main Content with Transition Effect Placeholder */}
       {/* Área principal: ocupa el espacio restante entre navbar y footer */}
@@ -203,6 +205,9 @@ const LandingPage = () => {
 
       {/* Modal de correo: se renderiza sobre todo el contenido */}
       <MailModal isOpen={isMailOpen} onClose={() => setIsMailOpen(false)} />
+
+      {/* Modal de CV: muestra el PDF del curriculum vitae */}
+      <CvModal isOpen={isCvOpen} onClose={() => setIsCvOpen(false)} />
     </div>
   );
 };
