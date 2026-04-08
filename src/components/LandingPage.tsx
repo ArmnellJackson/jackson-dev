@@ -40,13 +40,10 @@ const Hero = ({ onNavigate }: { onNavigate: (section: string) => void }) => (
 );
 
 /* Sección Servicios: grid de cards con layout responsivo.
-   En móvil las cards se apilan verticalmente; en desktop se muestran en 3 columnas. */
+   En móvil las cards se apilan verticalmente sin centrado vertical para permitir scroll desde el inicio.
+   En desktop se centran verticalmente y se muestran en 3 columnas. */
 const Servicios = () => (
-  <section className="py-8 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto h-full flex flex-col justify-center space-y-8 md:space-y-12">
-    <div className="text-center space-y-4">
-      <h2 className="text-3xl sm:text-4xl font-bold text-white">Servicios</h2>
-      <div className="w-20 h-1 bg-green-500 mx-auto"></div>
-    </div>
+  <section className="py-8 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto md:h-full flex flex-col md:justify-center space-y-8 md:space-y-12">
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
       {[
         { title: 'Apps Empresariales', icon: <Briefcase className="w-8 h-8 text-green-500" />, desc: 'Aplicaciones web completas para empresas de cualquier rubro. Como consultorios médicos y veterinarios (citas online, historias clínicas), Restaurantes (pedidos, reservas, inventario), Sistemas de Recursos Humanos (gestión de empleados, nómina, asistencias, vacaciones.) etc.' },
@@ -71,10 +68,6 @@ const Servicios = () => (
    Grid adaptativo: 1 columna en móvil, 2 en desktop. Tipografía escalada. */
 const Projects = () => (
   <section className="py-8 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto flex flex-col space-y-8 md:space-y-12">
-    <div className="text-center space-y-4">
-      <h2 className="text-3xl sm:text-4xl font-bold text-white">Proyectos Destacados</h2>
-      <div className="w-20 h-1 bg-green-500 mx-auto"></div>
-    </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       {[
         { name: 'Proyecto 1', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
@@ -109,10 +102,6 @@ const Projects = () => (
    Padding y tipografía adaptados a móvil; botones con tamaño mínimo de toque (44px). */
 const Contact = ({ onOpenMail }: { onOpenMail: () => void }) => (
   <section className="py-8 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto h-full flex flex-col justify-center space-y-8 md:space-y-12">
-    <div className="text-center space-y-4">
-      <h2 className="text-3xl sm:text-4xl font-bold text-white">Contacto</h2>
-      <div className="w-20 h-1 bg-green-500 mx-auto"></div>
-    </div>
     <div className="max-w-2xl mx-auto neumorph-container p-6 sm:p-10 space-y-6 sm:space-y-8 w-full">
       <p className="text-center text-gray-400 text-base sm:text-lg">¿Tienes un proyecto en mente? ¡Hablemos y hagámoslo realidad!</p>
       <div className="flex justify-center gap-6 sm:gap-8">
@@ -144,7 +133,7 @@ const LandingPage = () => {
 
       {/* Main Content with Transition Effect Placeholder */}
       {/* Área principal: ocupa el espacio restante entre navbar y footer */}
-      <main className={`flex-1 min-h-0 animate-in fade-in duration-700 flex flex-col ${activeSection === 'proyectos' ? 'overflow-y-auto' : 'overflow-hidden'}`}>
+      <main className={`flex-1 min-h-0 animate-in fade-in duration-700 flex flex-col ${activeSection === 'proyectos' || activeSection === 'servicios' ? 'overflow-y-auto' : 'overflow-hidden'}`}>
         {renderSection()}
       </main>
 
