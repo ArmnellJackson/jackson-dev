@@ -133,17 +133,21 @@ const Projects = () => (
   <section className="py-8 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto flex flex-col space-y-8 md:space-y-12">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       {[
-        { name: 'Proyecto 1', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
-        { name: 'Proyecto 2', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
-        { name: 'Proyecto 3', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
-        { name: 'Proyecto 4', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#' },
+        { name: 'Sistema Ventas', desc: 'Sistema web completo para la gestión comercial de un negocio: control de inventario, clientes, ventas y métricas. Construido con Next.js 16, Google Sheets como base de datos y Supabase para autenticación con roles.', repo: 'https://github.com/ArmnellJackson/demoSistemaVentas', live: 'https://demo-sistema-ventas.vercel.app/', img: '/loginDemoSistemaVentas.png' },
+        { name: 'Proyecto 2', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
+        { name: 'Proyecto 3', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
+        { name: 'Proyecto 4', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
       ].map((project, i) => (
         <div key={i} className="neumorph-container p-3 sm:p-4 overflow-hidden group">
-          {/* Imagen cliqueable: lleva al proyecto en producción */}
+          {/* Imagen cliqueable: muestra captura del proyecto o placeholder genérico */}
           <a href={project.live} target="_blank" rel="noopener noreferrer" className="block aspect-video bg-gray-800 rounded-[20px] sm:rounded-[30px] mb-3 sm:mb-4 overflow-hidden cursor-pointer">
-            <div className="w-full h-full bg-gradient-to-br from-green-900 to-black flex items-center justify-center opacity-50 group-hover:scale-105 transition-transform duration-500">
-              <Code className="w-10 h-10 sm:w-12 sm:h-12 text-white opacity-20" />
-            </div>
+            {project.img ? (
+              <img src={project.img} alt={project.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-green-900 to-black flex items-center justify-center opacity-50 group-hover:scale-105 transition-transform duration-500">
+                <Code className="w-10 h-10 sm:w-12 sm:h-12 text-white opacity-20" />
+              </div>
+            )}
           </a>
           <div className="flex items-center justify-between">
             <div className="min-w-0">
