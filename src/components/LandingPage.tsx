@@ -134,7 +134,7 @@ const Projects = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       {[
         { name: 'Sistema Ventas', desc: 'Sistema web completo para la gestión comercial de un negocio: control de inventario, clientes, ventas y métricas. Construido con Next.js 16, Google Sheets como base de datos y Supabase para autenticación con roles.', repo: 'https://github.com/ArmnellJackson/demoSistemaVentas', live: 'https://demo-sistema-ventas.vercel.app/', img: '/loginDemoSistemaVentas.png' },
-        { name: 'Proyecto 2', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
+        { name: 'Catálogo Dealer Autos', desc: 'Catalogo para Dealer de autos de lujo, desarrollad con Astro, Tailwind CSS v4 y componentes basados en shadcn/ui. Supabase como DB Y Auth. Flujo de n8n para avisar a la cartera de clientes cuando se agrega un nuevo auto por WhatsApp. Dashboard de control hecho con Nextjs.', repo: 'https://github.com/ArmnellJackson/catalogo-dealer-autos', live: 'https://catalogo-dealer-autos.vercel.app/', img: '/catalog-dealer-cars.png' },
         { name: 'Proyecto 3', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
         { name: 'Proyecto 4', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
       ].map((project, i) => (
