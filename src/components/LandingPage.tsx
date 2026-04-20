@@ -133,10 +133,9 @@ const Projects = () => (
   <section className="py-8 md:py-10 px-4 sm:px-6 max-w-7xl mx-auto flex flex-col space-y-8 md:space-y-12">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       {[
-        { name: 'Sistema Ventas', desc: 'Sistema web completo para la gestión comercial de un negocio: control de inventario, clientes, ventas y métricas. Construido con Next.js 16, Google Sheets como base de datos y Supabase para autenticación con roles.', repo: 'https://github.com/ArmnellJackson/demoSistemaVentas', live: 'https://demo-sistema-ventas.vercel.app/', img: '/loginDemoSistemaVentas.png' },
+        { name: 'E-commerce de Ropa Infantil', desc: 'Plataforma de comercio electrónico especializada en ropa para niños y niñas, diseñada con una estética lúdica, suave y moderna utilizando Astro + Tailwind CSS v4 + shadcn.', repo: 'https://github.com/ArmnellJackson/e-commerce-demo', live: 'https://e-commerce-demo-boys.vercel.app/', img: '/e-commerce-demo-boys.png' },
         { name: 'Catálogo Dealer Autos', desc: 'Catalogo para Dealer de autos de lujo, desarrollad con Astro, Tailwind CSS v4 y componentes basados en shadcn/ui. Supabase como DB Y Auth. Flujo de n8n para avisar a la cartera de clientes cuando se agrega un nuevo auto por WhatsApp. Dashboard de control hecho con Nextjs.', repo: 'https://github.com/ArmnellJackson/catalogo-dealer-autos', live: 'https://catalogo-dealer-autos.vercel.app/', img: '/catalog-dealer-cars.png' },
-        { name: 'Proyecto 3', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
-        { name: 'Proyecto 4', desc: 'Una descripción breve del impacto y la tecnología utilizada en este desarrollo innovador.', repo: '#', live: '#', img: '' },
+        { name: 'Sistema Ventas', desc: 'Sistema web completo para la gestión comercial de un negocio: control de inventario, clientes, ventas y métricas. Construido con Next.js 16, Google Sheets como base de datos y Supabase para autenticación con roles.', repo: 'https://github.com/ArmnellJackson/demoSistemaVentas', live: 'https://demo-sistema-ventas.vercel.app/', img: '/loginDemoSistemaVentas.png' },
       ].map((project, i) => (
         <div key={i} className="neumorph-container p-3 sm:p-4 overflow-hidden group">
           {/* Imagen cliqueable: muestra captura del proyecto o placeholder genérico */}
@@ -149,15 +148,15 @@ const Projects = () => (
               </div>
             )}
           </a>
-          <div className="flex items-center justify-between">
-            <div className="min-w-0">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">{project.name}</h3>
-              <p className="text-gray-400 text-sm sm:text-base">{project.desc}</p>
+          <div>
+            {/* Título con icono GitHub a la derecha */}
+            <div className="flex items-center justify-between mb-1 sm:mb-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-white">{project.name}</h3>
+              <a href={project.repo} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition-colors ml-3 shrink-0 p-1" title="Ver repositorio en GitHub">
+                <SiGithub className="w-6 h-6" />
+              </a>
             </div>
-            {/* Icono de código: lleva al repositorio del proyecto */}
-            <a href={project.repo} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition-colors ml-3 sm:ml-4 shrink-0 p-1" title="Ver código fuente">
-              <Code className="w-6 h-6" />
-            </a>
+            <p className="text-gray-400 text-sm sm:text-base">{project.desc}</p>
           </div>
         </div>
       ))}
